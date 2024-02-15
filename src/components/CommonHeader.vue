@@ -1,7 +1,13 @@
 <script lang="ts" setup>
+import { asideCollStore } from '@/stores/asideColl'
 //vite动态url，处理静态资源
 const getImgScr = (avatar: string) => {
   return new URL(`../assets/${avatar}.png`, import.meta.url).href
+}
+
+const asideColl = asideCollStore()
+const handleCollapse = () => {
+  asideColl.updateCollapse()
 }
 </script>
 
@@ -9,7 +15,7 @@ const getImgScr = (avatar: string) => {
   <el-header>
     <!-- 图标 -->
     <div class="l-content">
-      <el-button size="small">
+      <el-button size="small" @click="handleCollapse">
         <el-icon>
           <Menu />
         </el-icon>

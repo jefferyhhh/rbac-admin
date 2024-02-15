@@ -1,4 +1,8 @@
 <script lang="ts" setup>
+import { asideCollStore } from '@/stores/asideColl'
+
+const asideColl = asideCollStore()
+
 const list = [
   {
     path: '/user',
@@ -40,14 +44,17 @@ const hasChildren = () => {
 </script>
 
 <template>
-  <el-aside width="200px">
+  <el-aside :width="asideColl.$state.isCollapse ? '180px' : '64px'">
     <el-menu
       default-active="2"
       class="el-menu-vertical-demo"
       background-color="#545c64"
       text-color="#fff"
-      :collapse="false"
+      :collapse="!asideColl.$state.isCollapse"
+      :collapse-transition="false"
     >
+      <h3 v-show="asideColl.$state.isCollapse">后台管理</h3>
+      <h3 v-show="!asideColl.$state.isCollapse">后台</h3>
       <el-menu-item :index="item.path" :key="item.path" v-for="item in noChildren()">
         <component class="icons" :is="item.icon" />
         <span>{{ item.label }}</span>
@@ -80,5 +87,10 @@ const hasChildren = () => {
 
 .el-menu {
   border-right: none;
+  h3 {
+    line-height: 48px;
+    color: #fff;
+    text-align: center;
+  }
 }
 </style>
