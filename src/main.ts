@@ -1,5 +1,4 @@
 import './assets/less/index.less'
-
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 
@@ -7,6 +6,9 @@ import App from './App.vue'
 import router from './router'
 
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
+//mock
+import { mockRequest } from './api/mock'
+mockRequest()
 
 const app = createApp(App)
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
