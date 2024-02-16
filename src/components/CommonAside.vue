@@ -1,12 +1,20 @@
 <script lang="ts" setup>
 import { asideCollStore } from '@/stores/asideColl'
+import { useRouter } from 'vue-router'
+const router = useRouter()
 
 const asideColl = asideCollStore()
+
+const clickMenuItem = (item: any) => {
+  router.push({
+    name: item.name
+  })
+}
 
 const list = [
   {
     path: '/user',
-    name: 'name',
+    name: 'user',
     label: '用户管理',
     icon: 'user',
     url: ''
@@ -17,18 +25,18 @@ const list = [
     icon: 'location',
     children: [
       {
-        path: 'page1',
+        path: '/page1',
         name: 'page1',
         label: '页面一',
         icon: 'setting',
         url: 'Other/PageOne'
       },
       {
-        path: 'page1',
-        name: 'page1',
-        label: '页面一',
+        path: '/page2',
+        name: 'page2',
+        label: '页面二',
         icon: 'setting',
-        url: 'Other/PageOne'
+        url: 'Other/PageTwo'
       }
     ]
   }
@@ -55,7 +63,12 @@ const hasChildren = () => {
     >
       <h3 v-show="asideColl.$state.isCollapse">后台管理</h3>
       <h3 v-show="!asideColl.$state.isCollapse">后台</h3>
-      <el-menu-item :index="item.path" :key="item.path" v-for="item in noChildren()">
+      <el-menu-item
+        :index="item.path"
+        :key="item.path"
+        @click="clickMenuItem(item)"
+        v-for="item in noChildren()"
+      >
         <component class="icons" :is="item.icon" />
         <span>{{ item.label }}</span>
       </el-menu-item>
@@ -69,6 +82,7 @@ const hasChildren = () => {
             :index="subItem.path"
             v-for="(subItem, subIndex) in item.children"
             :key="subIndex"
+            @click="clickMenuItem(subItem)"
           >
             <component class="icons" :is="subItem.icon" />
             <span>{{ subItem.label }}</span>
