@@ -1,13 +1,17 @@
 <script lang="ts" setup>
-import axios from 'axios'
-import { onMounted, ref } from 'vue'
+import { type ComponentInternalInstance, getCurrentInstance, onMounted, ref } from 'vue'
 
+const { proxy } = getCurrentInstance() as ComponentInternalInstance
 const tableData = ref([])
 const getTableList = async () => {
-  await axios.get('/home/getData').then((response) => {
-    console.log(response)
-    tableData.value = response.data.data.tableData
-  })
+  // await axios.get('/home/getData').then((response) => {
+  //   console.log(response)
+  //   if (response.data.code == 200) {
+  //     tableData.value = response.data.data.tableData
+  //   }
+  // })
+  let res = await proxy?.$api.getTableData('')
+  tableData.value = res.data.data.tableData
 }
 onMounted(() => {
   getTableList()
