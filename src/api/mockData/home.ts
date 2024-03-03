@@ -1,6 +1,6 @@
 const getHomeData = [
   {
-    url: '/home/getData',
+    url: '/home/getTableData',
     type: 'get',
     response: () => {
       return {
@@ -29,6 +29,59 @@ const getHomeData = [
         }
       }
     }
+  },
+  {
+    url: '/home/getCountData',
+    type: 'get',
+    response: () => {
+      return {
+        code: 200,
+        data: {
+          CountData: [
+            {
+              name: '今日支付订单',
+              value: 1234,
+              icon: 'SuccessFilled',
+              color: '#7D3C98'
+            },
+            {
+              name: '今日收藏订单',
+              value: 67,
+              icon: 'StarFilled',
+              color: '#7D3C98'
+            },
+            {
+              name: '今日未支付订单',
+              value: 12,
+              icon: 'GoodsFilled',
+              color: '#7D3C98'
+            },
+            {
+              name: '本月支付订单',
+              value: 8886,
+              icon: 'SuccessFilled',
+              color: '#3498DB'
+            },
+            {
+              name: '本月收藏订单',
+              value: 677,
+              icon: 'StarFilled',
+              color: '#3498DB'
+            },
+            {
+              name: '本月未支付订单',
+              value: 78,
+              icon: 'GoodsFilled',
+              color: '#3498DB'
+            }
+          ]
+        }
+      }
+    }
   }
 ]
+
+// const getCountData = [
+
+// ]
 export default getHomeData

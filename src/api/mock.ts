@@ -1,9 +1,9 @@
 import Mock from 'mockjs'
 import { type MockParams } from './types'
-import homeapi from './mockData/home'
+import getTableData from './mockData/home'
 
 //需要遍历的请求
-const mocks = [...homeapi]
+const mocks = [...getTableData]
 //设置延时
 Mock.setup({
   timeout: '200-2000'
