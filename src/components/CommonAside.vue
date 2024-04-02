@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-import { asideCollStore } from '@/stores/asideColl'
+import { useAppStore } from '@/stores/app'
 import { useRouter } from 'vue-router'
 const router = useRouter()
 
-const asideColl = asideCollStore()
+const app_store = useAppStore()
 
 const clickMenuItem = (item: any) => {
   router.push({
@@ -52,17 +52,17 @@ const hasChildren = () => {
 </script>
 
 <template>
-  <el-aside :width="asideColl.$state.isCollapse ? '180px' : '64px'">
+  <el-aside :width="app_store.$state.isCollapse ? '180px' : '64px'">
     <el-menu
       default-active="2"
       class="el-menu-vertical-demo"
       background-color="#545c64"
       text-color="#fff"
-      :collapse="!asideColl.$state.isCollapse"
+      :collapse="!app_store.$state.isCollapse"
       :collapse-transition="false"
     >
-      <h3 v-show="asideColl.$state.isCollapse">后台管理</h3>
-      <h3 v-show="!asideColl.$state.isCollapse">后台</h3>
+      <h3 v-show="app_store.$state.isCollapse">后台管理</h3>
+      <h3 v-show="!app_store.$state.isCollapse">后台</h3>
       <el-menu-item
         :index="item.path"
         :key="item.path"

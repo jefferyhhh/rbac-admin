@@ -6,6 +6,8 @@ import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
 
+import { useAppStore } from '@/stores/app'
+
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 //mock
 import { mockRequest } from './api/mock'
@@ -25,5 +27,15 @@ app.config.globalProperties.$api = api
 
 app.use(createPinia())
 app.use(router)
+
+const appStore = useAppStore()
+
+router.beforeEach((to) => {
+  const crumbItemList = to.matched.map((item) => ({
+    to: { ...item },
+    name: item.name
+  }))
+  appStore.replaceCrumb(crumbItemList)
+})
 
 app.mount('#app')
