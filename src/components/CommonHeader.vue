@@ -1,14 +1,18 @@
 <script lang="ts" setup>
-import { asideCollStore } from '@/stores/asideColl'
+import { useAppStore } from '@/stores/app'
+import { computed } from 'vue'
 //vite动态url，处理静态资源
 const getImgScr = (avatar: string) => {
   return new URL(`../assets/${avatar}.png`, import.meta.url).href
 }
 
-const asideColl = asideCollStore()
+const app_store = useAppStore()
 const handleCollapse = () => {
-  asideColl.updateCollapse()
+  app_store.updateCollapse()
 }
+const crumbItemList = computed(() => {
+  return app_store.$state.crumbItemList
+})
 </script>
 
 <template>
@@ -20,7 +24,7 @@ const handleCollapse = () => {
           <Menu />
         </el-icon>
       </el-button>
-      <h3>首页</h3>
+      <BreadCrumb :crumbItemList="crumbItemList" />
     </div>
     <div class="r-content">
       <el-dropdown :hide-on-click="false">
@@ -63,5 +67,8 @@ header {
   h3 {
     color: #fff;
   }
+}
+.bread /deep/ span {
+  color: #fff !important;
 }
 </style>
