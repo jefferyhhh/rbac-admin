@@ -1,8 +1,11 @@
 <script lang="ts" setup>
 import { type ComponentInternalInstance, getCurrentInstance, onMounted, ref } from 'vue'
+import { type CountData } from '@/api/types'
+import LineChart from './components/LineChart.vue'
 
 const { proxy } = getCurrentInstance() as ComponentInternalInstance
 const tableData = ref([])
+const countData = ref<CountData[]>()
 const getTableList = async () => {
   // await axios.get('/home/getData').then((response) => {
   //   console.log(response)
@@ -13,8 +16,13 @@ const getTableList = async () => {
   let res = await proxy?.$api.getTableData('')
   tableData.value = res.data.data.tableData
 }
+const getCountData = async () => {
+  let res = await proxy?.$api.getCountData('')
+
+  countData.value = res.data.data.CountData
+}
 onMounted(() => {
-  getTableList()
+  getTableList(), getCountData()
 })
 
 const tableLabels = {
@@ -46,7 +54,27 @@ const tableLabels = {
         </el-table>
       </el-card>
     </el-col>
-    <el-col :span="16" style="margin-top: 20px" />
+    <el-col :span="16" style="margin-top: 20px">
+      <div class="num">
+        <el-card
+          shadow="hover"
+          :body-style="{ display: 'flex', padding: '0px' }"
+          v-for="(item, key) in countData"
+          :key="key"
+        >
+          <component class="icons" :is="item.icon" :style="{ color: item.color }" />
+          <div class="detail">
+            <p class="num">￥{{ item.value }}</p>
+            <p class="txt">{{ item.name }}</p>
+          </div>
+        </el-card>
+      </div>
+      <el-card style="height: 280px">
+        <div ref="echarts">
+          <LineChart />
+        </div>
+      </el-card>
+    </el-col>
   </el-row>
 </template>
 
@@ -74,6 +102,34 @@ const tableLabels = {
         color: #666;
         margin-left: 70px;
       }
+    }
+  }
+}
+.num {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  .el-card {
+    width: 32%;
+    margin-bottom: 20px;
+  }
+  .icons {
+    width: 80px;
+    height: 80px;
+  }
+  .detail {
+    margin-left: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    .num {
+      font-size: 30px;
+      margin-bottom: 10px;
+    }
+    .txt {
+      font-size: 14px;
+      text-align: center;
+      color: #999;
     }
   }
 }
