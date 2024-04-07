@@ -5,7 +5,7 @@ import CommonAside from '../components/CommonAside.vue'
 
 <template>
   <div class="common-layout">
-    <el-container>
+    <el-container class="lay-container">
       <CommonAside />
       <el-container class="r-container">
         <CommonHeader />
@@ -24,6 +24,9 @@ import CommonAside from '../components/CommonAside.vue'
 }
 
 .common-layout {
+  .lay-container {
+    flex-wrap: nowrap;
+  }
   height: 100%;
   & > .el-container {
     height: 100%;

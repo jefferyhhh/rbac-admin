@@ -68,7 +68,7 @@ header {
     color: #fff;
   }
 }
-.bread /deep/ span {
+.bread :deep(span) {
   color: #fff !important;
 }
 </style>
