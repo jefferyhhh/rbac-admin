@@ -1,4 +1,5 @@
 import get from './request'
+import post from './request'
 
 export default {
   getTableData(params: any) {
@@ -15,6 +16,11 @@ export default {
       method: 'get',
       data: params,
       params
+    })
+  },
+  getCaptcha() {
+    return post({
+      url: '/api/system/auth/captcha/get'
     })
   }
 }
