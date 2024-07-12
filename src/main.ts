@@ -10,8 +10,8 @@ import { useAppStore } from '@/stores/app'
 
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 //mock
-import { mockRequest } from './api/mock'
-mockRequest()
+// import { mockRequest } from './api/mock'
+// mockRequest()
 
 const app = createApp(App)
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {

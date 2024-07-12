@@ -1,26 +1,11 @@
-import get from './request'
-import post from './request'
+import { http } from '@/utils/request'
 
+interface captchaData {
+  key: 'string'
+  img_base: 'string'
+}
 export default {
-  getTableData(params: any) {
-    return get({
-      url: '/home/getTableData',
-      method: 'get',
-      data: params,
-      params
-    })
-  },
-  getCountData(params: any) {
-    return get({
-      url: '/home/getCountData',
-      method: 'get',
-      data: params,
-      params
-    })
-  },
   getCaptcha() {
-    return post({
-      url: '/api/system/auth/captcha/get'
-    })
+    return http.post<captchaData>('/api/system/auth/captcha/get')
   }
 }
