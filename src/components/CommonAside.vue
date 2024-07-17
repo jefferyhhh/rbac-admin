@@ -56,13 +56,14 @@ const hasChildren = () => {
     <el-menu
       default-active="2"
       class="el-menu-vertical-demo"
-      background-color="#545c64"
-      text-color="#fff"
+      background-color="#041527"
+      text-color=" #FFFFFFB3"
+      active-text-color="#FFFFFF"
       :collapse="!app_store.$state.isCollapse"
       :collapse-transition="false"
     >
-      <h3 v-show="app_store.$state.isCollapse">后台管理</h3>
-      <h3 v-show="!app_store.$state.isCollapse">后台</h3>
+      <h3 v-show="app_store.$state.isCollapse">RBAC Admin</h3>
+      <h3 v-show="!app_store.$state.isCollapse">Admin</h3>
       <el-menu-item
         :index="item.path"
         :key="item.path"
@@ -105,6 +106,11 @@ const hasChildren = () => {
     line-height: 48px;
     color: #fff;
     text-align: center;
+  }
+  .el-sub-menu {
+    .el-menu-item {
+      background-color: #112133 !important;
+    }
   }
 }
 </style>
