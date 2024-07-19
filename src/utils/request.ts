@@ -61,9 +61,9 @@ const errorHandler = async (error: AxiosError) => {
 }
 // 请求拦截器
 service.interceptors.request.use((config) => {
-  const token = storage.get('Access-Token')
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}` //携带token
+  const { accessToken } = storage.get('Access-Token') ?? { accessToken: null }
+  if (accessToken) {
+    config.headers.Authorization = `Bearer ${accessToken}` //携带token
   }
   return config
 }, errorHandler)
