@@ -3,23 +3,28 @@ import storage from 'store'
 /**
  * 存储数据
  */
-export const setItem = (key: string, value: any) => {
-  // 将数组、对象类型的数据转化为 JSON 字符串进行存储
+export const setItem = (
+  key: string,
+  value: string | number | boolean | object | null | undefined
+): void => {
   if (typeof value === 'object') {
     value = JSON.stringify(value)
   }
-  window.localStorage.setItem(key, value)
+  window.localStorage.setItem(key, value as string)
 }
 
 /**
  * 获取数据
  */
-export const getItem = (key: string) => {
-  const data: any = window.localStorage.getItem(key)
+export const getItem = <T>(key: string): T | null => {
+  const data = window.localStorage.getItem(key)
+  if (data === null) {
+    return null
+  }
   try {
-    return JSON.parse(data)
+    return JSON.parse(data) as T
   } catch (err) {
-    return data
+    return data as T
   }
 }
 
