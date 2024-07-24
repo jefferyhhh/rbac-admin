@@ -10,17 +10,16 @@ import { isTags } from '@/utils/tags'
 const $route = useRoute()
 const app_store = useAppStore()
 
-// const getTitle = (route: RouteLocationNormalized): string => {
-//   let title: string = ''
-//   if (!route.meta) {
-//     // 处理无 meta 的路由
-//     const pathArr: string[] = route.path.split('/')
-//     title = pathArr[pathArr.length - 1]
-//   } else {
-//     title = route.meta.title as string
-//   }
-//   return title
-// }
+const getTitle = (route: RouteLocationNormalized): string => {
+  let title: string = ''
+  if (!route.meta) {
+    // 处理无 meta 的路由
+    title = route.name as string
+  } else {
+    title = route.meta.title as string
+  }
+  return title
+}
 
 /**
  * 监听路由变化
@@ -29,17 +28,15 @@ watch(
   $route,
   (to) => {
     if (!isTags(to.path)) return
-    const { fullPath, meta, name, params, path, query } = to
+    const { fullPath, meta, name, path, query } = to
     console.log('meta', meta)
 
     app_store.addTag({
       fullPath,
-      meta,
       name,
-      params,
       path,
-      query
-      // title: getTitle(to)
+      query,
+      title: getTitle(to)
     })
     console.log('app_store.tagsViewList', app_store.tagsViewList)
   },
