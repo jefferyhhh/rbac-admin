@@ -1,53 +1,68 @@
 <script lang="ts" setup>
 import { useAppStore } from '@/stores/app'
+import { useUserInfo } from '@/stores/userInfo'
 import { useRouter } from 'vue-router'
-const router = useRouter()
+import { onMounted, reactive } from 'vue'
+import { listToTree, type MenuTreeItem } from '@/utils/util'
 
+const router = useRouter()
+const storeUserInfo = useUserInfo()
 const app_store = useAppStore()
 
+interface MenuItemType {
+  path: string
+  label: string
+  icon?: string
+  children?: MenuItemType[]
+}
 const clickMenuItem = (item: any) => {
   router.push({
-    name: item.name
+    path: item.path
   })
 }
 
-const list = [
-  {
-    path: '/user',
-    name: 'user',
-    label: '用户管理',
-    icon: 'user',
-    url: ''
-  },
-  {
-    label: '其他',
-    path: '/other',
-    icon: 'location',
-    children: [
-      {
-        path: '/page1',
-        name: 'page1',
-        label: '页面一',
-        icon: 'setting',
-        url: 'Other/PageOne'
-      },
-      {
-        path: '/page2',
-        name: 'page2',
-        label: '页面二',
-        icon: 'setting',
-        url: 'Other/PageTwo'
-      }
-    ]
-  }
-]
+const menuList: MenuItemType[] = reactive([])
 
 const noChildren = () => {
-  return list.filter((item) => !item.children)
+  return menuList.filter((item) => !item.children)
 }
 
 const hasChildren = () => {
-  return list.filter((item) => item.children)
+  return menuList.filter((item) => item.children)
+}
+
+onMounted(() => {
+  console.log(listToTree(storeUserInfo.$state.routeList), 'rotelistTree')
+  const menuTree = listToTree(storeUserInfo.$state.routeList)
+
+  let userMenus = menuGenerator(menuTree)
+  console.log(userMenus, 'userMenus')
+  menuList.push(...userMenus)
+  console.log(menuList, 'menuList')
+})
+
+const menuGenerator = (menuData: MenuTreeItem[]) => {
+  const routerList = []
+  for (const item of menuData) {
+    if (item.hidden) {
+      continue
+    }
+
+    // let icon = null
+    // if (item.icon) {
+    //   icon = item.icon
+    // }
+    const routerItem: MenuItemType = {
+      path: item.route_path,
+      label: item.name,
+      icon: item.icon
+    }
+    if (item.children && item.children.length > 0) {
+      routerItem.children = menuGenerator(item.children)
+    }
+    routerList.push(routerItem)
+  }
+  return routerList
 }
 </script>
 
@@ -81,11 +96,11 @@ const hasChildren = () => {
         <el-menu-item-group>
           <el-menu-item
             :index="subItem.path"
-            v-for="(subItem, subIndex) in item.children"
-            :key="subIndex"
+            v-for="subItem in item.children"
+            :key="subItem.path"
             @click="clickMenuItem(subItem)"
           >
-            <component class="icons" :is="subItem.icon" />
+            <component v-if="subItem.icon" class="icons" :is="subItem.icon" />
             <span>{{ subItem.label }}</span>
           </el-menu-item>
         </el-menu-item-group>
