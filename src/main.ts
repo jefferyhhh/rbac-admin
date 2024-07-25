@@ -31,9 +31,9 @@ app.use(router)
 const appStore = useAppStore()
 
 router.beforeEach((to) => {
-  const crumbItemList = to.matched.map((item) => ({
+  const crumbItemList = to.matched.slice(1).map((item) => ({
     to: { ...item },
-    name: item.name
+    name: item.meta?.title || item.name
   }))
   appStore.replaceCrumb(crumbItemList)
 })
