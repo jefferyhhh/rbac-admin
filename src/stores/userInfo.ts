@@ -1,9 +1,9 @@
 import { defineStore } from 'pinia'
-import { getUserInfo } from '@/api/user'
+import { getUserInfo, type userInfoRes } from '@/api/user'
 
 export const useUserInfo = defineStore('userInfo', {
   state: () => ({
-    basicInfo: {},
+    basicInfo: {} as userInfoRes,
     routeList: [],
     hasGetRoute: false
   }),
@@ -28,7 +28,7 @@ export const useUserInfo = defineStore('userInfo', {
     //   this.basicInfo.avatar = avatar
     // },
     clearUserInfo() {
-      this.basicInfo = {}
+      this.basicInfo = {} as userInfoRes
       this.routeList = []
       this.hasGetRoute = false
     }

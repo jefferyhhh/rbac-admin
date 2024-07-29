@@ -13,7 +13,7 @@ interface loginRes {
   refresh_token: string
   expires_in: number
 }
-interface userInfoRes {
+export interface userInfoRes {
   avatar: string
   menus?: MenuItem[]
   username: string
@@ -51,6 +51,10 @@ export interface MenuItem {
   type: number
   updated_at: string
 }
+export type updateUserInfoForm = Pick<
+  userInfoRes,
+  'name' | 'avatar' | 'email' | 'gender' | 'mobile'
+>
 
 /**
  * 登录验证
@@ -84,4 +88,10 @@ export function getNewToken(body: { refresh_token: string }): Promise<Result<log
  */
 export function getUserInfo() {
   return http.get<Result<userInfoRes>>('/api/system/user/current/info')
+}
+export function updateCurrentUserInfo(body: updateUserInfoForm) {
+  return http.post<Result>('/api/system/user/current/info/update', body)
+}
+export function changeCurrentUserPassword(body: { old_password: string; new_password: string }) {
+  return http.post<Result>('/api/system/user/current/password/change', body)
 }
