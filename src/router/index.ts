@@ -11,6 +11,12 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: () => import('@/views/login/login.vue')
+  },
+  {
+    path: '/:catchAll(.*)',
+    name: '404',
+    meta: { title: '404' },
+    component: () => import('@/views/exception/404.vue')
   }
 ]
 const rootRouter: RouteRecordSingleViewWithChildren = {
