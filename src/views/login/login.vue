@@ -31,8 +31,12 @@ const onSubmitLogin = () => {
   ruleFormRef.value?.validate((valid: boolean) => {
     if (valid) {
       form.captcha_key = captchaState.key
-      form.password = md5(form.password)
-      login(form)
+      const submitData = {
+        ...form,
+        password: md5(form.password),
+        captcha_key: captchaState.key
+      }
+      login(submitData)
         .then((res) => {
           const { access_token, refresh_token, expires_in } = res.data
           if (res.code == 200) {
@@ -77,7 +81,7 @@ onMounted(() => requestCaptcha())
         <el-input placeholder="请输入用户名" v-model="form.username" />
       </el-form-item>
       <el-form-item prop="password">
-        <el-input placeholder="请输入密码" v-model="form.password" type="password" />
+        <el-input placeholder="请输入密码" v-model="form.password" show-password type="password" />
       </el-form-item>
       <el-form-item prop="captcha" class="code-box">
         <el-input placeholder="验证码" v-model="form.captcha" class="code-input" />
