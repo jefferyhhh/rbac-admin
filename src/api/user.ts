@@ -31,26 +31,6 @@ interface roleOrPosition {
   description: string | null
   available: boolean
 }
-export interface MenuItem {
-  available: boolean
-  cache: boolean
-  component_path: string | null
-  created_at: string
-  description: string | null
-  hidden: boolean
-  icon?: string
-  id: number
-  name: string
-  order: number
-  parent_id: number | null
-  parent_name: string | null
-  permission: string
-  redirect: string
-  route_name: string
-  route_path: string
-  type: number
-  updated_at: string
-}
 export type updateUserInfoForm = Pick<
   userInfoRes,
   'name' | 'avatar' | 'email' | 'gender' | 'mobile'

@@ -3,7 +3,7 @@ import { useAppStore } from '@/stores/app'
 import { useUserInfo } from '@/stores/userInfo'
 import { useRouter } from 'vue-router'
 import { onMounted, reactive } from 'vue'
-import { listToTree, type MenuTreeItem } from '@/utils/util'
+import { listToTree } from '@/utils/util'
 
 const router = useRouter()
 const storeUserInfo = useUserInfo()

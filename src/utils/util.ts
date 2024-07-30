@@ -1,9 +1,5 @@
 import _ from 'lodash'
-import type { MenuItem } from '@/api/user'
 
-export interface MenuTreeItem extends MenuItem {
-  children?: MenuTreeItem[]
-}
 export function listToTree(menuItems: MenuItem[]): MenuTreeItem[] {
   const menuMap = new Map<number, MenuTreeItem>()
   const rootItems: MenuTreeItem[] = []
