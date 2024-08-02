@@ -18,7 +18,7 @@
 		"@types/mockjs": "^1.0.10",
 		"axios": "^1.6.7",
 		"echarts": "^5.5.0",
-		"element-plus": "^2.5.1",
+		"element-plus": "^2.7.8",
 		"lodash": "^4.17.21",
 		"md5": "^2.3.0",
 		"pinia": "^2.1.7",
