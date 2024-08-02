@@ -1,6 +1,4 @@
 import { listToTree } from '@/utils/util'
-import type { MenuItem } from '@/api/user'
-import type { MenuTreeItem } from '@/utils/util'
 import { describe, it, expect } from 'vitest'
 
 describe('listToTree', () => {
