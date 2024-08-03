@@ -79,4 +79,8 @@ watch(
     }
   }
 }
+.el-main {
+  padding: 8px;
+  height: calc(100vh - 100px);
+}
 </style>
