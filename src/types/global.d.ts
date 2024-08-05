@@ -19,24 +19,24 @@ declare type TagView = {
 
 /** 来自后端的菜单 */
 declare type MenuItem = {
-  available: boolean
-  cache: boolean
-  component_path: string | null
-  created_at: string
-  description: string | null
-  hidden: boolean
+  available?: boolean
+  cache?: boolean
+  component_path?: string | null
+  created_at?: string
+  description?: string | null
+  hidden?: boolean
   icon?: string
-  id: number
-  name: string
-  order: number
-  parent_id: number | null
-  parent_name: string | null
-  permission: string
-  redirect: string | null
-  route_name: string
-  route_path: string
-  type: number
-  updated_at: string
+  id?: number
+  name?: string
+  order?: number
+  parent_id?: number | null
+  parent_name?: string | null
+  permission?: string
+  redirect?: string | null
+  route_name?: string
+  route_path?: string
+  type?: number
+  updated_at?: string
 }
 /* util处理后的菜单 */
 declare type MenuTreeItem = MenuItem & {
