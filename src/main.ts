@@ -12,12 +12,13 @@ import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 //mock
 // import { mockRequest } from './api/mock'
 // mockRequest()
-
+const iconNameList: string[] = []
 const app = createApp(App)
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component)
+  iconNameList.push(key)
 }
-
+export { iconNameList }
 declare module 'vue' {
   interface ComponentCustomProperties {
     $api?: any
