@@ -25,7 +25,7 @@ declare type MenuItem = {
   created_at?: string
   description?: string | null
   hidden?: boolean
-  icon?: string
+  icon: string
   id?: number
   name?: string
   order?: number
@@ -41,4 +41,11 @@ declare type MenuItem = {
 /* util处理后的菜单 */
 declare type MenuTreeItem = MenuItem & {
   children?: MenuTreeItem[]
+}
+
+/* 选择器数据 */
+declare type SelectorType = {
+  label: string
+  value: string | number
+  children?: SelectorType[]
 }
