@@ -9,6 +9,9 @@ import router from './router'
 import { useAppStore } from '@/stores/app'
 
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
+
+import ElementPlus from 'element-plus'
+import zhCn from 'element-plus/es/locale/lang/zh-cn'
 //mock
 // import { mockRequest } from './api/mock'
 // mockRequest()
@@ -25,6 +28,10 @@ declare module 'vue' {
   }
 }
 app.config.globalProperties.$api = api
+
+app.use(ElementPlus, {
+  locale: zhCn
+})
 
 app.use(createPinia())
 app.use(router)
