@@ -26,7 +26,7 @@ declare type MenuItem = {
   description?: string | null
   hidden?: boolean
   icon: string
-  id?: number
+  id: number
   name?: string
   order?: number
   parent_id?: number | null
@@ -48,4 +48,20 @@ declare type SelectorType = {
   label: string
   value: string | number
   children?: SelectorType[]
+}
+
+/* 来自后端的部门数据 */
+declare type DeptItem = {
+  id?: number
+  name?: string
+  order?: number
+  parent_id?: number
+  available?: boolean
+  description?: string
+}
+
+/* util处理后的部门数据 */
+
+declare type DeptTreeItem = DeptItem & {
+  children?: DeptTreeItem[]
 }

@@ -53,8 +53,8 @@ const menuGenerator = (menuData: MenuTreeItem[]) => {
     //   icon = item.icon
     // }
     const routerItem: MenuItemType = {
-      path: item.route_path,
-      label: item.name,
+      path: item.route_path!,
+      label: item.name!,
       icon: item.icon
     }
     if (item.children && item.children.length > 0) {

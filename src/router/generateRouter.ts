@@ -1,15 +1,14 @@
 import type { RouteRecordSingleViewWithChildren } from 'vue-router'
-import type { MenuTreeItem } from '@/utils/util'
 
 const modules = import.meta.glob('../views/**/**.vue')
 
 export const generator = (routers: MenuTreeItem[]) => {
   return routers.map((item) => {
     const currentRouter: RouteRecordSingleViewWithChildren = {
-      path: item.route_path,
+      path: item.route_path!,
       name: item.route_name,
       component: item.component_path ? modules[`../views/${item.component_path}.vue`] : null,
-      redirect: item.redirect,
+      redirect: item.redirect ?? undefined,
       children: [],
       meta: {
         title: item.name,
