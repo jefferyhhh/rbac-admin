@@ -55,7 +55,7 @@ declare type DeptItem = {
   id?: number
   name?: string
   order?: number
-  parent_id?: number
+  parent_id?: number | null
   available?: boolean
   description?: string
 }
