@@ -13,6 +13,7 @@ export function toDeptTreeItem(item: MenuItem): DeptTreeItem {
     id: item.id,
     name: item.name,
     available: item.available,
+    order: item.order,
     parent_id: item.parent_id ?? undefined,
     description: item.description ?? '',
     children: []
