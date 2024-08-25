@@ -183,7 +183,7 @@
     </el-form>
     <template #footer>
       <div class="dialog-footer">
-        <el-button type="primary" @click="submitForm">确 定</el-button>
+        <el-button type="primary" :loading="loading" @click="submitForm">确 定</el-button>
         <el-button @click="closeDialog(dialogFormRef)">取 消</el-button>
       </div>
     </template>
