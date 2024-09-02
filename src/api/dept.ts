@@ -26,6 +26,10 @@ export function deleteDept(parameter: { id: number }): Promise<Result> {
   })
 }
 
+export function getDeptOptions() {
+  return http.get<Result<MenuItem[]>>('/api/system/dept/options')
+}
+
 export function batchEnableDept(body: { ids: number[] }) {
   return http.post<Result>('/api/system/dept/batch/enable', body)
 }
