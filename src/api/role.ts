@@ -41,8 +41,8 @@ export function getRoleList(parameter: getRolelistParams): Promise<Result<roleLi
   })
 }
 
-export function getRoleOptions(parameter: number) {
-  return http.get<Result>('/api/system/role/detail' + '?id=' + parameter)
+export function getRoleOptions() {
+  return http.get<Result<roleListType[]>>('/api/system/role/options')
 }
 
 export function createRole(body: submitRoleBody) {

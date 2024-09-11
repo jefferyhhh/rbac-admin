@@ -75,3 +75,73 @@ export function updateCurrentUserInfo(body: updateUserInfoForm) {
 export function changeCurrentUserPassword(body: { old_password: string; new_password: string }) {
   return http.post<Result>('/api/system/user/current/password/change', body)
 }
+
+/**
+ * 用户管理
+ */
+export interface userListType {
+  id?: number
+  index?: number
+  username?: string
+  name?: string
+  email?: string
+  mobile?: string
+  gender?: number
+  password?: string
+  roles?: roleItemType[]
+  roleNames?: string
+  role_ids?: number[]
+  dept_id?: number
+  dept_name?: string
+  positionNames?: string
+  position_ids?: number[]
+  positions?: positionItemType[]
+  available?: boolean
+  is_superuser?: boolean
+  creator?: creatorType
+  creatorName?: string
+  description?: string
+  created_at?: string
+  updated_at?: string
+  last_login?: string
+}
+export interface roleItemType {
+  id?: number
+  name?: string
+  available?: boolean
+  description?: string
+}
+export interface positionItemType {
+  id?: number
+  name?: string
+  available?: boolean
+  description?: string
+}
+interface creatorType {
+  id?: number
+  name?: string
+}
+
+export function getUserList(params: { page?: number; page_size?: number }) {
+  return http.get<Result<userListType[]>>('/api/system/user/list', { params })
+}
+
+export function getUserDetail(id: number) {
+  return http.get<Result<userListType>>('/api/system/user/detail', { params: { id } })
+}
+
+export function createUser(body: userListType) {
+  return http.post<Result>('/api/system/user/create', body)
+}
+
+export function updateUser(body: userListType) {
+  return http.post<Result>('/api/system/user/update', body)
+}
+
+export function deleteUser(parameter: { id: number }) {
+  return service<Result>({
+    url: '/api/system/user/delete',
+    method: 'post',
+    params: parameter
+  })
+}
