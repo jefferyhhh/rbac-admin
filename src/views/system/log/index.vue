@@ -70,9 +70,11 @@ const handleQuery = () => {
   loadingData()
 }
 const handleResetQuery = () => {
+  if (!queryForm) return
   Object.keys(queryForm).forEach((key) => {
-    delete queryForm[key]
+    delete queryForm[key as keyof searchDataType]
   })
+  // queryForm = {}
   current_page.value = 1
   loadingData()
 }

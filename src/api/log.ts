@@ -1,4 +1,4 @@
-import service from '@/utils/request'
+import service, { type Result } from '@/utils/request'
 
 interface getLogParameter {
   page?: number
@@ -8,7 +8,10 @@ interface getLogParameter {
   start_time?: string
   end_time?: string
 }
-export function getLogList(parameter: getLogParameter) {
+interface logListRes extends Result {
+  total: number
+}
+export function getLogList(parameter: getLogParameter): Promise<logListRes> {
   return service({
     url: '/api/system/log/list',
     method: 'get',
