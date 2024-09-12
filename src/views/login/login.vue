@@ -78,10 +78,10 @@ onMounted(() => requestCaptcha())
     <el-form :model="form" ref="ruleFormRef" class="login-form" :rules="loginRules" status-icon>
       <h2 class="login-title">RBAC权限管理系统</h2>
       <el-form-item prop="username">
-        <el-input placeholder="请输入用户名" v-model="form.username" />
+        <el-input placeholder="admin" v-model="form.username" />
       </el-form-item>
       <el-form-item prop="password">
-        <el-input placeholder="请输入密码" v-model="form.password" show-password type="password" />
+        <el-input placeholder="admin1212" v-model="form.password" show-password type="password" />
       </el-form-item>
       <el-form-item prop="captcha" class="code-box">
         <el-input placeholder="验证码" v-model="form.captcha" class="code-input" />
