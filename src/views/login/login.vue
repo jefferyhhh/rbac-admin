@@ -49,12 +49,10 @@ const onSubmitLogin = () => {
         })
         .catch((err) => {
           console.log(err, 'err')
-          if (err.code == 401) {
-            //重新获取验证码
-            requestCaptcha()
-            form.captcha = ''
-          }
+
           loginLoading.value = false
+          requestCaptcha()
+          form.captcha = ''
         })
     } else {
       loginLoading.value = false
@@ -78,13 +76,24 @@ onMounted(() => requestCaptcha())
     <el-form :model="form" ref="ruleFormRef" class="login-form" :rules="loginRules" status-icon>
       <h2 class="login-title">RBAC权限管理系统</h2>
       <el-form-item prop="username">
-        <el-input placeholder="admin" v-model="form.username" />
+        <el-input @keyup.enter="onSubmitLogin" placeholder="admin" v-model="form.username" />
       </el-form-item>
       <el-form-item prop="password">
-        <el-input placeholder="admin1212" v-model="form.password" show-password type="password" />
+        <el-input
+          @keyup.enter="onSubmitLogin"
+          placeholder="admin1212"
+          v-model="form.password"
+          show-password
+          type="password"
+        />
       </el-form-item>
       <el-form-item prop="captcha" class="code-box">
-        <el-input placeholder="验证码" v-model="form.captcha" class="code-input" />
+        <el-input
+          @keyup.enter="onSubmitLogin"
+          placeholder="验证码"
+          v-model="form.captcha"
+          class="code-input"
+        />
         <div class="code-img" @click="requestCaptcha">
           <el-image :src="captchaState.img_base" />
         </div>
@@ -103,7 +112,7 @@ onMounted(() => requestCaptcha())
   position: absolute;
   width: 100%;
   height: 100%;
-  background: #ccc;
+  background: url('/background.jpg');
   .login-form {
     width: 350px;
     background-color: #fff;

@@ -58,6 +58,11 @@ const errorHandler = async (error: AxiosError) => {
       return service(errRes.config).then((response) => response)
     })
   }
+  ElNotification({
+    title: '发生错误',
+    message: message,
+    type: 'error'
+  })
 }
 // 请求拦截器
 service.interceptors.request.use((config) => {
