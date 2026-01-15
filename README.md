@@ -1,6 +1,13 @@
 ## 基于RBAC的权限管理系统
 
-演示地址（临时）：[http://47.120.45.168:8200/](http://47.120.45.168:8200/)
+**技术栈**：Vue3 +TS+ ElementPlus+ECharts+Less+Pinia
+
+**特性**：
+
+- 双Token登录机制，自动刷新Token
+- 基于TypeScript 泛型封装Axios，并做了统一的错误处理
+- vitest单元测试
+- 根据权限动态生成用户路由
 
 **功能：**
 
