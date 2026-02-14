@@ -33,6 +33,7 @@ const handleCommand = (command: string) => {
   } else {
     storage.remove('Access-Token')
     storage.remove('Refresh-Token')
+    storeUserInfo.clearUserInfo()
     // storage.remove('UserInfo');.......
     router.push('/login')
     console.log('退出')
