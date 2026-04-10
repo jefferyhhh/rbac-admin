@@ -101,7 +101,7 @@ const activities = [
           <template #header>
             <h1 style="float: left">进行中的项目</h1>
             <div class="clearfix">
-              <el-button type="text" style="float: right">全部项目</el-button>
+              <el-button link type="primary" style="float: right">全部项目</el-button>
             </div>
           </template>
           <!-- 项目列表 -->
