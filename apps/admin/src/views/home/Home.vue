@@ -22,7 +22,7 @@ const getCountData = async () => {
   countData.value = res.data.data.CountData
 }
 onMounted(() => {
-  getTableList(), getCountData()
+  ;(getTableList(), getCountData())
 })
 
 const tableLabels = {

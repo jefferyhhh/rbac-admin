@@ -1,27 +1,33 @@
 {
   "name": "backend",
   "version": "0.1.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Fastify REST API",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon --watch src -e ts --exec tsx src/index.ts",
-    "build": "tsc && tsc-alias"
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc && tsc-alias",
+    "start": "node dist/index.js",
+    "lint": "cd ../.. && pnpm exec eslint apps/backend/src/ --no-warn-ignored",
+    "format": "prettier --write src/",
+    "type-check": "tsc --noEmit"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "dependencies": {
+    "fastify": "^5.8.4"
+  },
   "devDependencies": {
     "@tsconfig/node20": "^20.1.9",
     "@types/node": "^18.19.130",
+    "eslint": "^8.57.1",
     "nodemon": "^3.1.14",
+    "prettier": "^3.8.1",
     "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
+    "tsc-alias": "^1.8.10",
     "tsconfig-paths": "^4.2.0",
     "tsx": "^4.7.0",
     "typescript": "~5.3.3"
-  },
-  "dependencies": {
-    "fastify": "^5.8.4"
   }
 }
