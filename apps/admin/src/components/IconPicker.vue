@@ -30,7 +30,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, defineProps, defineEmits, onMounted, toRef } from 'vue'
+import { ref, onMounted, toRef } from 'vue'
 
 // Props
 interface Props {
