@@ -1,17 +1,13 @@
-import Fastify from 'fastify'
+import { buildApp } from './app.js'
+import { startServer, setupGracefulShutdown } from './server.js'
 
-const app = Fastify({
-  logger: true,
-})
+async function main() {
+  const app = await buildApp()
+  const ctx = await startServer(app)
+  setupGracefulShutdown(ctx)
+}
 
-app.get('/', async (_request, _reply) => {
-  return { hello: 'world' }
-})
-
-app.listen({ port: 3000 }, (err, address) => {
-  if (err) {
-    app.log.error(err)
-    process.exit(1)
-  }
-  app.log.info(`Server listening at ${address}`)
+main().catch((err) => {
+  console.error('❌ Failed to start server:', err)
+  process.exit(1)
 })

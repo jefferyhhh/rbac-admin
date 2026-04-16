@@ -29,6 +29,9 @@ coverage
 
 *.tsbuildinfo
 
+# Environment
+.env
+
 #按需引入
 auto-imports.d.ts
 components.d.ts
