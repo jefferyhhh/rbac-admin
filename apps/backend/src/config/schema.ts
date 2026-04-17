@@ -8,6 +8,7 @@ export const EnvSchema = Type.Object({
   HOST: Type.String({ default: '0.0.0.0' }),
   PORT: Type.Number({ default: 3000 }),
   API_PREFIX: Type.String({ default: '/api' }),
+  DATABASE_URL: Type.String({ description: 'PostgreSQL connection string' }),
 })
 
 export type Env = Static<typeof EnvSchema>

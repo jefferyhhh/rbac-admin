@@ -7,6 +7,7 @@ const raw = {
   HOST: process.env.HOST,
   PORT: process.env.PORT ? Number(process.env.PORT) : undefined,
   API_PREFIX: process.env.API_PREFIX,
+  DATABASE_URL: process.env.DATABASE_URL,
 }
 
 export const config = Value.Decode(EnvSchema, raw)

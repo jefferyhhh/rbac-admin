@@ -5,6 +5,7 @@ import { config } from './config/index.js'
 import { errorHandler } from './middlewares/error-handler.js'
 import { setupResponseHelpers } from './shared/schemas/response.schema.js'
 import healthModule from './modules/health/index.js'
+import prismaPlugin from './shared/plugins/postgres.js'
 
 export async function buildApp(opts?: { logger?: boolean }) {
   const app = Fastify({
@@ -15,13 +16,16 @@ export async function buildApp(opts?: { logger?: boolean }) {
   // 1. 安全 & 跨域
   await app.register(cors, { origin: true, credentials: true })
 
-  // 2. 响应装饰器
+  // 2. 技术插件
+  await app.register(prismaPlugin)
+
+  // 3. 响应装饰器
   setupResponseHelpers(app)
 
-  // 3. 错误处理
+  // 4. 错误处理
   app.setErrorHandler(errorHandler)
 
-  // 4. 业务模块（health 仅用于验证架构可行性，后续会替换为 auth + system）
+  // 5. 业务模块
   await app.register(healthModule, { prefix: config.API_PREFIX })
 
   return app
